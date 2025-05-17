@@ -8,6 +8,3 @@ Esta formação oferece uma jornada completa pelos fundamentos do Java, desde os
 2. [Programação Orientada a Objetos e Estruturas de Dados com Java](./02-poo-e-estruturas/)
 3. [Gerenciando Exceções, IO e Dependências em Java](./03-excecoes-io-dependencias/)
 4. [Técnicas Avançadas, Padrões e Persistências](./04-tecnicas-avancadas/)
-
-
-#
