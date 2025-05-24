@@ -9,6 +9,10 @@ Este módulo aborda os primeiros passos na programação com Java. Aqui você en
 4. Fundamentos da Linguagem de Programação Java
 
 
-# Imagem do bootcamp Introdução ao Java e seu Ambiente de Desenvolvimento
+# Introdução ao Java e seu Ambiente de Desenvolvimento
 
 [Introdução ao Java: Ambiente de Desenvolvimento](./Intro_Java_ambiente_de_desenvolvimento.md)
+
+# Introdução ao Java e seu Ambiente de Desenvolvimento
+
+[Padrões de desenvolvimento e conceitos](./Padroes_desenvolvimento_conceitos.md)
