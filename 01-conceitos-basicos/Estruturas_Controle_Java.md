@@ -212,3 +212,142 @@ public class CondicaoIfElse {
 }
 
 ```
+
+## Estruturra condicional switch case
+
+O switch case é uma estrutura de controle usada para tomar decisões com base no valor de uma variável. Ele é uma alternativa ao uso de múltiplos if-else.
+
+```java
+switch (variavel) {
+    case valor1:
+        // código se variavel == valor1
+        break;
+    case valor2:
+        // código se variavel == valor2
+        break;
+    default:
+        // código se nenhum valor anterior for igual
+}
+
+```
+
+Switch case a partir da versão 14:
+
+```java
+int dia = 3;
+
+switch (dia) {
+    case 1 -> System.out.println("Domingo");
+    case 2 -> System.out.println("Segunda");
+    case 3 -> System.out.println("Terça");
+    default -> System.out.println("Dia inválido");
+}
+```
+
+Switch case com variavel:
+
+```java
+int dia = 3;
+
+String retorno = switch (dia) {
+    case 1 -> "Domingo";
+    case 2 -> "Segunda";
+    case 3 -> "Terça";
+    case 4 -> "Quarta";
+    case 5 -> "Quinta";
+    case 6 -> "Sexta";
+    case 7 -> "Sábado";
+    default -> "Dia inválido";
+};
+
+System.out.println(retorno);
+```
+
+Exemplo simples:
+
+```java
+int dia = 3;
+
+switch (dia) {
+    case 1:
+        System.out.println("Domingo");
+        break;
+    case 2:
+        System.out.println("Segunda");
+        break;
+    case 3:
+        System.out.println("Terça");
+        break;
+    default:
+        System.out.println("Dia inválido");
+}
+
+```
+
+## Estrutura de repetição For
+
+O for é uma estrutura de repetição usada para executar um bloco de código várias vezes, geralmente com base em uma contagem ou condição.
+
+Sintaxe Tradicional:
+
+```java
+for (inicialização; condição; incremento) {
+    // código a ser repetido
+}
+```
+
+For infinito com interrupção interna(break)
+
+```java
+for (;;) {
+    System.out.println("Digite um nome: ");
+    var name = scanner.next();
+
+    if (name.equalsIgnoreCase("exit")) break;
+
+    System.out.println(name);
+}
+
+```
+
+For com condição de parada (break)
+
+```java
+for (var i = 1; i < 100; i++) {
+    if (i == 90) break;
+    System.out.println(i);
+}
+
+```
+
+For com continue (pula para a próxima iteração)
+
+```java
+for (var i = 1; i < 100; i++) {
+    if (i % 2 == 0) continue;
+    System.out.println(i);
+}
+```
+
+For-each (percorrer elementos de uma coleção ou array)
+
+```java
+for (var arg : args) {
+    System.out.println(arg);
+}
+```
+
+### 📝 Tipos de `for` em Java
+
+| Tipo de `for`         | Quando usar                                                |
+|-----------------------|------------------------------------------------------------|
+| Tradicional           | Quando você sabe quantas vezes o loop vai repetir          |
+| Infinito com `break`  | Quando a saída depende de uma condição externa (ex: input) |
+| Com `continue`        | Para pular certas iterações (ex: ignorar números pares)    |
+| For-each              | Para percorrer coleções ou arrays sem usar índice direto   |
+
+## Estrutura de repetição while e do while
+
+As estruturas while e do-while são usadas quando não sabemos quantas vezes o código vai repetir, e a repetição depende de uma condição lógica.
+
+while simples
