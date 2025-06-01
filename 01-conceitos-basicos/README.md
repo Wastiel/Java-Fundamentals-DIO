@@ -6,6 +6,6 @@ Este módulo aborda os primeiros passos na programação com Java. Aqui você en
 1. [Introdução ao Java e seu Ambiente de Desenvolvimento](./Intro_Java_ambiente_de_desenvolvimento.md)
 2. [Introdução ao Java e seu Ambiente de Desenvolvimento](./Padroes_desenvolvimento_conceitos.md)
 3. [Estruturas de condição e repetição em java](./Padroes_desenvolvimento_conceitos.md)
-4. [ ]()
+4. [Desafio de código](./Desafio_Codigo.md)
 
 #

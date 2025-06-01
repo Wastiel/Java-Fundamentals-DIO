@@ -1,10 +1,12 @@
-# Formação Java Fundamentals DIO
+# Programação Orientada a Objetos e Estruturas de Dados com JAva
 
-Esta formação oferece uma jornada completa pelos fundamentos do Java, desde os primeiros passos até práticas avançadas de desenvolvimento com foco em código limpo, design patterns e uso de ferramentas modernas.
+Curso focado em conceitos de Programação Orientada a Objetos (POO) e Estruturas de Dados, utilizando Java como linguagem principal. Ensina desde encapsulamento, herança e polimorfismo até listas, pilhas e filas.
 
 ## 📚 Módulos
 
-1. [Conceitos Básicos para Começar a Programar em Java](./01-conceitos-basicos/)
-2. [Programação Orientada a Objetos e Estruturas de Dados com Java](./02-poo-e-estruturas/)
-3. [Gerenciando Exceções, IO e Dependências em Java](./03-excecoes-io-dependencias/)
-4. [Técnicas Avançadas, Padrões e Persistências](./04-tecnicas-avancadas/)
+1. [Java e a Abstração com Classes e Encapsulamento](./01-conceitos-basicos/)
+2. [Herança e Polimorfismo em Java](./02-poo-e-estruturas/)
+3. [Dominando Interfaces e Lambda em java](./03-excecoes-io-dependencias/)
+4. [Praticando com Collections e Outras classes Úteis do Java](./04-tecnicas-avancadas/)
+5. [Criando um jogo do Sudoku em Java](./04-tecnicas-avancadas/)
+6. [Estruturas de Controle em Java](./04-tecnicas-avancadas/)
