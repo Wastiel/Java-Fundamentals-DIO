@@ -22,7 +22,7 @@
     - Nao é recomendado realizar importes de packages com *, para evitar importação desnecessária
 - Se criarmos um package, semrpe colocamos a nomenclatura contraria:
     - br.com.dio
-- Comentario seguimos os dois padrões:]
+- Comentario seguimos os dois padrões:
     ```java
      // comentario de uma linha
         

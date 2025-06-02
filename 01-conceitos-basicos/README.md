@@ -8,4 +8,3 @@ Este módulo aborda os primeiros passos na programação com Java. Aqui você en
 3. [Estruturas de condição e repetição em java](./Padroes_desenvolvimento_conceitos.md)
 4. [Desafio de código](./Desafio_Codigo.md)
 
-#
