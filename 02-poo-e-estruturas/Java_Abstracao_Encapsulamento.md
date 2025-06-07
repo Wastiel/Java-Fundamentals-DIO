@@ -408,6 +408,8 @@ Siga as seguintes regras para implementar
    - Para valores acima de R$500,00 o cheque especial deve ser de 50% do valor depositado;
    - Caso o limite de cheque especial seja usado, assim que possível a conta deve cobrar uma taxa de 20% do valor usado do cheque especial.
 
+- [Resultado da ativiodade criada do zero](./ContaBancaria/)
+- [Resultado da ativiodade refatorada com dicas do GPT](./ContaBancaria_Refatorada/)
 --------
 
 2. Escreva um código onde controlamos as funções de um carro, ele deve ter as seguintes funções:
