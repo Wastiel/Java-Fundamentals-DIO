@@ -9,6 +9,7 @@ public class Pet {
     public Pet(String nome, String raca){
         this.nome = nome;
         this.raca = raca;
+        this.limpo = false;
     }
 
     public String getNome() {
@@ -25,5 +26,13 @@ public class Pet {
 
     public void setRaca(String raca) {
         this.raca = raca;
+    }
+
+    public void setLimpo(boolean limpo) {
+        this.limpo = limpo;
+    }
+
+    public boolean isLimpo() {
+        return limpo;
     }
 }
