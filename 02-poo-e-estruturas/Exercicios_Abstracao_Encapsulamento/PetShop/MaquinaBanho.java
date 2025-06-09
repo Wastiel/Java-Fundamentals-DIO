@@ -8,18 +8,18 @@ public class MaquinaBanho {
     private boolean emUso = false;
     private final int limiteAgua = 30;
     private final int limiteShampoo = 10;
-    private boolean utilizada = false;
+    private boolean suja = false;
 
 
     public void setEmUso(boolean emUso) {
         this.emUso = emUso;
     }
     public boolean isUtilizada() {
-        return utilizada;
+        return suja;
     }
 
-    public void setUtilizada(boolean utilizada) {
-        this.utilizada = utilizada;
+    public void setUtilizada(boolean suja) {
+        this.suja = suja;
     }
 
     public void abastecerShampoo(){
@@ -41,7 +41,7 @@ public class MaquinaBanho {
         } else {
             shampoo += -3;
             agua += -1;
-            this.utilizada = false;
+            this.suja = false;
             return true;
         }
     }
@@ -54,6 +54,7 @@ public class MaquinaBanho {
         if(!isEmUso()){
             pet = new Pet(nome, raca);
             emUso = true;
+            suja = true;
             return true;
         }else{
             return false;
@@ -65,6 +66,7 @@ public class MaquinaBanho {
             return false;
         } else{
             pet.setLimpo(true);
+            suja = false;
             this.agua -= 10;
             this.shampoo -= 2;
             return true;
@@ -74,7 +76,7 @@ public class MaquinaBanho {
     public boolean retirarMaquina(){
         if(this.emUso){
             this.emUso = false;
-            this.utilizada = pet.isLimpo();
+            //this.suja = pet.isLimpo();
             return true;
         }else{
             return false;

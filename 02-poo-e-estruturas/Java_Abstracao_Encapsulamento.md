@@ -408,8 +408,8 @@ Siga as seguintes regras para implementar
    - Para valores acima de R$500,00 o cheque especial deve ser de 50% do valor depositado;
    - Caso o limite de cheque especial seja usado, assim que possível a conta deve cobrar uma taxa de 20% do valor usado do cheque especial.
 
-- [Resultado da ativiodade criada do zero](./ContaBancaria/)
-- [Resultado da ativiodade refatorada com dicas do GPT](./ContaBancaria_Refatorada/)
+- [Resultado da ativiodade criada do zero](./Exercicios_Abstracao_Encapsulamento/ContaBancaria/)
+- [Resultado da ativiodade refatorada com dicas do GPT](./Exercicios_Abstracao_Encapsulamento/ContaBancaria_Refatorada/)
 --------
 
 2. Escreva um código onde controlamos as funções de um carro, ele deve ter as seguintes funções:
@@ -438,6 +438,9 @@ Siga as seguintes regras na implementação
    - O carro podera ser desligado se estiver em ponto morto (marcha 0) e sua velocidade em 0 km
    - O carro só pode virar para esquerda/direita se sua velocidade for de no mínimi 1km e no máximo 40km;
 
+- [Resultado da ativiodade criada do zero](./Exercicios_Abstracao_Encapsulamento/Carro/)
+- [Resultado da ativiodade refatorada com dicas do GPT](./Exercicios_Abstracao_Encapsulamento/Carro_Refatorado/)
+
 -------------
 
 3. Escreva um código onde temos o controle de banho de um petshop, a maquina de banhos dos pets deve ter as seguintes operações:
@@ -459,3 +462,73 @@ Siga as seguintes regras para implementação
    - Se o pet for retirado da maquina sem estar limpo será necessário limpar a máquina para permitir a entrada de outro pet;
    - A limpeza da máquina ira consumir 3 litros de água e 1 litro de shampoo;
    - O abastecimento de água e shampoo deve permitir 2 litros por vez que for acionado;
+
+- [Resultado da ativiodade criada do zero](./Exercicios_Abstracao_Encapsulamento/PetShop/)
+- [Resultado da ativiodade refatorada com dicas do GPT](./Exercicios_Abstracao_Encapsulamento/PetShopRefatorado/)
+
+## Questionário
+
+# Quiz de Java - Fundamentos da Programação Orientada a Objetos
+
+---
+
+### 1. Como chamamos o construtor padrão de uma classe no Java?
+
+- [ ] Object.new();
+- [ ] Object();
+- [ ] Object.constructor();
+- [ ] Nenhuma das anteriores  
+- ✅ **new Object();**
+
+---
+
+### 2. O que é um `record` no Java?
+
+- [ ] É um tipo do Java que serve para armazenar o estado atual da sua aplicação  
+- ✅ **É um tipo de classe introduzido no Java que por padrão tem um construtor com argumento e uma vez instanciada não pode mais ter suas propriedades alteradas, é uma classe imutável**  
+- [ ] É um tipo de classe no Java com um construtor sem argumentos, que depois de definir a primeira vez uma propriedade via setter, ela não pode mais ser alterada, uma classe imutável  
+- [ ] Nenhuma das anteriores  
+- [ ] É uma forma mais enxuta de se criar classes e pode substituir totalmente o antigo padrão usando a keyword class  
+
+---
+
+### 3. Como declarar um objeto da classe `Pessoa` em Java?
+
+- ✅ **Pessoa pessoa = new Pessoa();**  
+- [ ] new Pessoa pessoa;  
+- [ ] Pessoa pessoa = Pessoa();  
+- [ ] Pessoa pessoa; pessoa = Pessoa();  
+- [ ] Pessoa pessoa();  
+
+---
+
+### 4. Considere o seguinte código:
+
+```java
+public class Person {
+    private String name;
+    // considerar que existe o get e set da propriedade name
+}
+
+final var person = new Person();
+person.setName("João");
+System.out.println(person.getName());
+```
+
+Qual será o resultado da execução?
+
+- [ ] O código não roda porque a classe Person não tem um construtor definido  
+- [ ] O código não roda porque a variável person é final e não pode ter seus valores alterados  
+- [ ] O código irá rodar, porém o nome será nulo porque a variável person é imutável  
+- ✅ **O objeto person é instanciado como final (imutável), sua propriedade name recebe o valor de “João” (pois o objeto é final, mas sua propriedade não é) e é exibido no console**  
+- [ ] Nenhuma das anteriores  
+
+---
+
+### 5. Qual a função da keyword `final` no Java?
+
+- [ ] Usamos a keyword final para marcar o final de um método void  
+- [ ] Nenhuma das anteriores  
+- [ ] Java não trabalha com keyword final, para valores constantes devemos usar const  
+- ✅ **Essa keyword torna uma variável ou propriedade imutável. No caso de variáveis, ela recebe um valor e não poderá mais ser alterado. Para propriedades de uma classe, a mesma só pode ser definida via construtor e irá assumir durante todo ciclo de vida da classe**  
+- [ ] É uma keyword usada para marcar o final do ciclo de vida de uma variável no fluxo do código  
