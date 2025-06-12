@@ -116,142 +116,356 @@ class Neto extends Filho2 {} // Permitido porque Filho2 é non-sealed
 
 ## Explorando Herança e Polimorfismo
 
-cast de um timpo para outro tipo
+## 1. Conceitos Fundamentais
 
-verifica instancia:  if(employee instanceof Manager)
+### Herança
+Herança permite que uma classe (subclasse) herde atributos e comportamentos (métodos) de outra classe (superclasse).
 
-Verifica pega as propriedades do manager ((Manager) employee).setPassword("123456");
-
-No java 17,mmudou para 
-
-if(employee instanceof Manager manager) {
-            employee.setName("João");
-            manager.setLogin("joao");
-            manager.setPassword("123456");
-
-            System.out.println(employee.getName());
-            System.out.println(manager.getLogin());
-            System.out.println(manager.getPassword());
-
-        }
-
-System.out.printf("-----%s-----\n", employee.getClass().getCanonicalName());
-
-
+Exemplo:
 ```java
-package HerancaPolimorfismo;
+public class Employee {
+    protected String code;
+    protected String name;
+    // ...
+}
+public class Manager extends Employee {
+    private String login;
+    private String password;
+    // ...
+}
+```
 
-public class Main {
+### Polimorfismo
+Polimorfismo permite que objetos sejam tratados de forma genérica por suas superclasses, mas executem comportamentos específicos em tempo de execução.
 
-    public static void main(String[] args){
+Exemplo:
+```java
+Employee e = new Manager();
+```
 
-        Employee manager = new Manager();
+## 2. Cast e `instanceof`
 
-        printEmployee(new Manager());
-        printEmployee(new Salesman());
+### Antes do Java 16
+```java
+if (employee instanceof Manager) {
+    Manager manager = (Manager) employee;
+    manager.setPassword("123456");
+}
+```
+
+### A partir do Java 16+ (Pattern Matching)
+```java
+if (employee instanceof Manager manager) {
+    manager.setPassword("123456");
+}
+```
+
+## 3. `switch` com `instanceof` (Java 17+)
+```java
+switch (employee) {
+    case Manager manager -> {
+        manager.setLogin("joao");
+        manager.setPassword("123456");
     }
-
-    public static void printEmployee(Employee employee){
-
-        System.out.printf("-----%s-----\n", employee.getClass().getCanonicalName());
-        if(employee instanceof Manager manager) {
-
-
-        }
-
-        switch (employee){
-            case Manager manager ->{
-                manager.setCode("123");
-                manager.setName("João");
-                manager.setSalary(5000);
-                manager.setLogin("joao");
-                manager.setPassword("123456");
-                manager.setCommission(15);;
-
-                System.out.println(manager.getCode());
-                System.out.println(manager.getSalary());
-                System.out.println(manager.getName());
-                System.out.println(manager.getCommission());
-                System.out.println(manager.getLogin());
-                System.out.println(manager.getPassword());
-            }
-            case Salesman salesman ->{
-                salesman.setCode("123");
-                salesman.setName("Lucas");
-                salesman.setSalary(2800);
-                salesman.setPercentPerSold(10);
-
-                System.out.println(salesman.getCode());
-                System.out.println(salesman.getSalary());
-                System.out.println(salesman.getName());
-                System.out.println(salesman.getPercentPerSold());
-            }
-        }
-        System.out.println("----------");
+    case Salesman salesman -> {
+        salesman.setPercentPerSold(10);
     }
 }
 ```
 
-So ta permitindo um case sem default pq a nossa classe está selada. 
+> Obs: O `switch` sem `default` é possível aqui porque `Employee` é uma classe `sealed`, e o compilador sabe que só existem dois possíveis filhos.
 
-record nao pode ter clausula extends
+## 4. Palavra-chave `super`
+Usada para acessar atributos ou métodos da superclasse:
+```java
+@Override
+public String getCode() {
+    return "MN" + super.getCode();
+}
+```
 
-record nao pode ter propridades dentro dele, a nao ser static e o que for static nao pode passar por herança.
+## 5. Modificadores de Acesso
+- `private`: visível apenas na própria classe.
+- `protected`: visível no mesmo pacote e em subclasses.
+- `public`: visível em qualquer lugar.
 
-public Manager(String code,
-                   String name,
-                   String address,
-                   String age,
-                   double salary,
-                   String login,
-                   String password,
-                   double commission) {
-        super(code, name, address, age, salary);
-        this.login = login;
-        this.password = password;
-        this.commission = commission;
+## 6. Métodos Abstratos
+Definidos em uma classe abstrata sem implementação:
+```java
+public abstract double getFullSalary();
+```
+A implementação é obrigatória nas subclasses.
+
+## 7. Sobrescrita (Override)
+Substitui o comportamento da superclasse:
+```java
+@Override
+public double getFullSalary() {
+    return this.salary + this.commission;
+}
+```
+
+## 8. Sobrecarga (Overload)
+Mesma assinatura de nome com parâmetros diferentes:
+```java
+public double getFullSalary() {
+    return this.salary + this.commission;
+}
+
+public double getFullSalary(double extra) {
+    return this.salary + this.commission + extra;
+}
+```
+
+---
+
+## 9. Classes Utilizadas no Exemplo
+
+### Classe `Employee` (abstrata e selada)
+```java
+public sealed abstract class Employee permits Manager, Salesman {
+    protected String code;
+    protected String name;
+    protected String address;
+    protected String age;
+    protected double salary;
+
+    public abstract double getFullSalary();
+    // getters e setters omitidos
+}
+```
+
+### Classe `Manager`
+```java
+public non-sealed class Manager extends Employee {
+    private String login;
+    private String password;
+    private double commission;
+
+    @Override
+    public double getFullSalary() {
+        return this.salary + this.commission;
     }
 
-    Sempre que vermos super é em uma cadeia de herança é para acionar um comprotamento da classe pai. 
-
-
-    sobrescrita
-
-        @Override
-    public String getCode(){
-        return "SL" + super.getCode();
+    public double getFullSalary(double extra) {
+        return this.salary + this.commission + extra;
     }
+}
+```
 
-    COnseguimos sobrescrever um compoirtamento da nossa classe utilizando um comportamento da nossa classe abstrata, sendo opicional
+### Classe `Salesman`
+```java
+public non-sealed class Salesman extends Employee {
+    private double percentPerSold;
+    private double souldAmount;
 
-    Se precisarmos acessar diretamente um atributo privado na cadeia de herança 
-
-    protected ele é mais restritivo publico e mais acesso que o privated. Nao permite acesso de fora da sua classe a nao ser que a classe que está acessando este código está herdando.
-
-    consegue acessar propriedades dentro do mesmo package
-
-    metodo abstrato que nao tem corpo, mas ele esta ali, a responsabilidad de fazer este método é de quem heerda ele.
-
-    pelo fato de ser abstrato a nossa função abaixo pode ser chamada no main:
-        @Override
-    public double getFullSalary(){
+    @Override
+    public double getFullSalary() {
         return this.salary + (souldAmount * percentPerSold / 100);
     }
+}
+```
+
+## 10. Exemplo de Execução
+```java
+public static void printEmployee(Employee employee) {
+    switch (employee) {
+        case Manager manager -> {
+            manager.setLogin("joao");
+            manager.setPassword("123456");
+            System.out.println(manager.getFullSalary());
+        }
+        case Salesman salesman -> {
+            salesman.setPercentPerSold(10);
+            salesman.setSouldAmount(1000);
+            System.out.println(salesman.getFullSalary());
+        }
+    }
+}
+```
+
+## 11. Limitações de `record`
+- `record` não pode herdar de outra classe (não pode usar `extends`).
+- Só pode ter membros `static`, que não são herdáveis.
 
 
-    Abaixo é sobrecarga de método, podemos ter quantas assinaturas quisermos. mesmo nome com comportamentos diferentes. 
+## Reforçando Herança e Polimorfismo Java
 
-        @Override
-    public double getFullSalary(){
-        return this.salary + this.commission;
+O istanceof no java valida se um objeto telação de hierarquia com outro objeto. 
+
+## Questionário:
+
+# Perguntas sobre Herança, Polimorfismo e Classes em Java
+
+## 🔁 Herança
+
+Herança é o mecanismo que permite que uma classe (subclasse ou classe filha) herde atributos e comportamentos (métodos) de outra classe (superclasse ou classe pai).
+
+Exemplo básico:
+
+```java
+public class Animal {
+    public void fazerSom() {
+        System.out.println("Algum som...");
+    }
+}
+
+public class Cachorro extends Animal {
+    @Override
+    public void fazerSom() {
+        System.out.println("Latido");
+    }
+}
+```
+
+---
+
+## 🔄 Polimorfismo
+
+Polimorfismo significa que podemos usar uma referência de uma superclasse para apontar para um objeto de qualquer subclasse, e ainda assim invocar métodos que foram sobrescritos.
+
+```java
+Animal meuAnimal = new Cachorro();
+meuAnimal.fazerSom(); // Saída: Latido
+```
+
+O método sobrescrito é chamado mesmo com a variável sendo do tipo `Animal`.
+
+---
+
+## 🔍 instanceof no Java
+
+O operador `instanceof` é usado para verificar se um objeto é uma instância de uma classe específica ou se ele pertence a uma hierarquia de classes.
+
+### ✅ Sintaxe antiga:
+
+```java
+if (meuAnimal instanceof Cachorro) {
+    Cachorro dog = (Cachorro) meuAnimal;
+    dog.fazerSom();
+}
+```
+
+### ✅ Sintaxe moderna (Java 16+):
+
+```java
+if (meuAnimal instanceof Cachorro dog) {
+    dog.fazerSom();
+}
+```
+
+### 💡 Importante:
+
+`instanceof` não testa igualdade de tipos, mas sim relacionamento de herança.  
+Ou seja, verifica se o objeto pode ser considerado do tipo especificado, mesmo que a referência seja da superclasse.
+
+---
+
+## 🧠 Por que instanceof é útil?
+
+Em códigos que trabalham com polimorfismo, muitas vezes você quer tratar objetos de formas diferentes com base em sua classe real.  
+O `instanceof` permite essa diferenciação sem quebrar o princípio do polimorfismo.
+
+---
+
+## 📦 Exemplo completo:
+
+```java
+public abstract class Funcionario {
+    public abstract void trabalhar();
+}
+
+public class Gerente extends Funcionario {
+    public void trabalhar() {
+        System.out.println("Gerenciando equipe...");
     }
 
-    public double getFullSalary(double extra){
-        return this.salary + this.commission;
+    public void aprovarFolga() {
+        System.out.println("Folga aprovada!");
+    }
+}
+
+public class Desenvolvedor extends Funcionario {
+    public void trabalhar() {
+        System.out.println("Escrevendo código...");
+    }
+}
+```
+
+```java
+public class Teste {
+    public static void main(String[] args) {
+        Funcionario f1 = new Gerente();
+        Funcionario f2 = new Desenvolvedor();
+
+        testarFuncionario(f1);
+        testarFuncionario(f2);
     }
 
-    Sobre escrita é quando pegamos um comportamento da classe pai e alteramos na classe filho
+    public static void testarFuncionario(Funcionario f) {
+        f.trabalhar();
 
-    
+        if (f instanceof Gerente gerente) {
+            gerente.aprovarFolga(); // Só Gerente tem esse método
+        }
+    }
+}
+```
 
-    
+---
+
+## 📌 Resumo
+
+- ✅ Herança permite que classes compartilhem código.
+
+- ✅ Polimorfismo permite tratar diferentes classes como se fossem do mesmo tipo.
+
+- ✅ `instanceof` verifica se um objeto faz parte da hierarquia de uma classe.
+
+- ✅ A sintaxe moderna do `instanceof` é mais limpa e segura, pois evita casting manual.
+
+
+---
+
+### 1. Além de estar contida na lista da cláusula `permits` de uma classe `sealed`, qual outra condição a classe filha deve atender?
+
+- ✅ **A classe deve ser marcada como `final`, `sealed` ou `non-sealed`**  
+- [ ] A classe deve ser marcada como `final` ou `sealed`  
+- [ ] Nenhuma das alternativas  
+- [ ] A classe deve ter um construtor que recebe como argumentos as propriedades da classe pai, pois a classe `sealed` só pode ter propriedades finais  
+- [ ] A classe deve ser marcada como `final` e `non-sealed`  
+
+---
+
+### 2. Qual a diferença entre uma classe `sealed` e uma classe `final`?
+
+- ✅ **A classe `sealed` só pode ser estendida por classes contidas na cláusula `permits` e a classe `final` não pode ser estendida por nenhuma**  
+- [ ] A classe `sealed` se herdada define que as classes filhas só tenham os mesmos métodos e atributos que ela possui e a classe `final` não pode ser herdade por nenhuma classe  
+- [ ] Nenhuma das alternativas  
+- [ ] A classe `sealed` é uma classe usada nos tipos internos do Java e a classe `final` indica a classe que está mais abaixo da hierarquia das heranças  
+- [ ] A classe `final` só pode ser estendida por classes contidas na cláusula `permits`. A classe `sealed` não pode ser estendida por nenhuma  
+
+---
+
+### 3. O que é herança?
+
+- [ ] Nenhuma das alternativas  
+- [ ] É a capacidade de uma classe poder herdar propriedades de métodos de uma outra classe. No Java temos suporte para trabalhar com herança múltipla  
+- ✅ **É a capacidade de uma classe poder herdar propriedades de métodos de uma outra classe. No Java as classes só podem herdar de 1 classe**  
+- [ ] É a capacidade de uma classe herdar as propriedades de uma outra classe. No Java não temos suporte para herança múltipla  
+- [ ] É a capacidade de uma classe herdar os métodos de uma outra classe. No Java não temos suporte para herança múltipla  
+
+---
+
+### 4. O que é uma classe abstrata?
+
+- [ ] É uma classe que não pode ser instanciada, somente classes abstratas podem ser herdadas  
+- [ ] É uma classe que não pode ser herdada  
+- [ ] É uma classe que só pode ser herdada por classes contidas na cláusula `permits`  
+- ✅ **É uma classe que não pode ser instanciada, somente as classes que estendem da mesma que não são abstratas**  
+- [ ] Nenhuma das alternativas  
+
+
+## Exercício: Herança e Polimorfismo em java
+
+1. Crie uma hierarquia de classes para tratar os tipos de ingresso que podem ser comercializados em um cinema. O ingresso deve ter um valor, nome do filme e informar se é dublado ou legendado. A partir desse ingresso devem ser criados os tipos Meia entrada e ingresso família. Cada ingresso deve ter um método que retorna o seu valor real ( baseado no valor informado na criação do ingresso) para os de meia entrada o seu valor deve ser de metade do valor, para os ingressos família deve-se retornar o valor multiplicado pelo número de pessoas e fornecer um desconto de 5% quando o número de pessoas for maior que 3.
