@@ -117,4 +117,113 @@ System.out.println(soma.executar(2, 3)); // Saída: 5
 
 ---
 
-Se quiser, posso adicionar exemplos com `default`, `static`, ou `@FunctionalInterface` também!
+## Interfaces Funcionais
+
+A classe list é uma interface. Se criarmos uma variavel lista a gente vai criar uma classe através de uma interface
+
+Interface tem que ter um metodo para implementar somente um e o resto vai ser default. 
+
+Lambda, o que é lambda? 
+
+
+# ☕ Interfaces Funcionais e Lambda em Java
+
+## 🧩 O que é uma Interface Funcional?
+
+Uma **interface funcional** em Java é uma interface que possui **apenas um método abstrato**.
+
+Isso é importante porque **expressões lambda** só funcionam com esse tipo de interface!
+
+### ✅ Exemplo de Interface Funcional:
+
+```java
+@FunctionalInterface
+public interface Operacao {
+    int executar(int a, int b);
+}
+```
+
+> ⚠️ Ela pode ter outros métodos `default` ou `static`, mas **só um método abstrato é permitido**.
+
+---
+
+## ⚡ O que é uma expressão Lambda?
+
+Uma **expressão lambda** é uma forma **compacta e elegante** de implementar uma interface funcional **sem criar uma classe anônima ou concreta**.
+
+### 🧠 Sintaxe básica:
+
+```java
+(parâmetros) -> { corpo }
+```
+
+---
+
+### 📌 Exemplo com Lambda
+
+```java
+Operacao soma = (a, b) -> a + b;
+System.out.println(soma.executar(2, 3)); // Saída: 5
+```
+
+---
+
+## 🎓 Relação com a interface `List`
+
+```java
+List<String> nomes = new ArrayList<>();
+```
+
+- `List` é uma **interface**.
+- `ArrayList` é uma **classe concreta** que a implementa.
+- Quando você escreve `List<String> nomes = new ArrayList<>();`, você está **criando uma variável com o tipo da interface** e **instanciando uma classe que implementa essa interface**.
+
+> Isso é um exemplo de **programação orientada à interface**, o que favorece o **polimorfismo**.
+
+---
+
+## 🧪 Aplicação com métodos de coleção
+
+Você pode usar **lambdas** com coleções Java como `List`, especialmente com métodos como `.forEach()` e `.removeIf()`:
+
+```java
+List<String> nomes = List.of("Ana", "Beto", "Carlos");
+
+nomes.forEach(nome -> System.out.println("Olá, " + nome));
+```
+
+---
+
+## 🧠 Comparando: classe anônima vs lambda
+
+### 🔸 Classe anônima:
+
+```java
+Runnable r = new Runnable() {
+    @Override
+    public void run() {
+        System.out.println("Executando!");
+    }
+};
+```
+
+### 🔹 Lambda (versão simplificada):
+
+```java
+Runnable r = () -> System.out.println("Executando!");
+```
+
+> Ambas funcionam, mas a lambda é mais limpa e moderna!
+
+---
+
+## ✅ Conclusão
+
+- Interfaces funcionais têm **apenas um método abstrato**.
+- Lambdas são **funções anônimas** que implementam esse método.
+- **List é uma interface**, e você sempre instancia uma classe concreta como `ArrayList` para usá-la.
+- Interfaces com métodos `default` não impedem o uso de lambdas, desde que haja **só um método abstrato**.
+
+---
+
+## Entendendo algumas KeyWords
