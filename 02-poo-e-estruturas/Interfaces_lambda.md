@@ -226,4 +226,163 @@ Runnable r = () -> System.out.println("Executando!");
 
 ---
 
-## Entendendo algumas KeyWords
+## Entendendo algumas KeyWords Java
+
+# 🔑 Entendendo algumas Keywords em Java
+
+## 🧭 1. Modificadores de Acesso
+
+### `public`
+- Permite que **qualquer classe** acesse o elemento (atributo, método ou classe).
+- Visível **em qualquer lugar do projeto**.
+
+### `default` (sem modificador)
+- Quando **nenhum modificador é declarado**, o acesso é considerado **default**.
+- Só é acessível **dentro do mesmo pacote**.
+
+### `protected`
+- Acesso **no mesmo pacote** **e** também para **subclasses (herança)** mesmo que estejam em outro pacote.
+
+### `private`
+- Acesso **restrito apenas à própria classe**.
+- Nem mesmo subclasses ou classes do mesmo pacote conseguem acessar.
+
+---
+
+## 📦 2. `package`
+
+- Define **o agrupamento lógico das classes**.
+- Ajuda na organização e encapsulamento.
+- Exemplo:
+  
+  ```java
+  package br.com.meusistema.utils;
+  ```
+
+---
+
+## ⚙️ 3. `static` vs `non-static`
+
+### `static`
+- Pertence à **classe** e **não à instância**.
+- Compartilhado entre todas as instâncias.
+- Útil para **métodos utilitários** e **constantes**.
+  
+  ```java
+  public static int contador;
+  ```
+
+### `não-static` (instância)
+- Pertence a **cada objeto** criado.
+- Valores são **independentes** para cada instância da classe.
+
+---
+
+## 🧪 Exemplo:
+
+```java
+public class Exemplo {
+    public static int total; // comum a todas as instâncias
+    public int individual;   // cada instância tem o seu
+}
+```
+
+---
+
+## 🔒 4. `final`
+
+- Indica que algo **não pode ser alterado**:
+
+| Onde é usado     | O que significa                         |
+|------------------|------------------------------------------|
+| variável         | valor não pode ser modificado (constante)|
+| método           | não pode ser sobrescrito (override)      |
+| classe           | não pode ser estendida (herdada)         |
+
+---
+
+## 📥 5. Importação Estática (`import static`)
+
+- Permite importar **métodos estáticos** ou **constantes** diretamente, sem precisar prefixar com a classe.
+
+```java
+import static java.lang.Math.*;
+
+System.out.println(sqrt(25)); // não precisa escrever Math.sqrt()
+```
+
+---
+
+## ✅ Conclusão
+
+Essas keywords são essenciais para entender:
+
+- **Encapsulamento e visibilidade (`public`, `protected`, `private`, `default`)**  
+- **Comportamento compartilhado ou exclusivo (`static` vs não-static)**  
+- **Segurança e imutabilidade (`final`)**  
+- **Organização de código (`package`, `import static`)**
+
+# Quiz de Interfaces
+
+
+### 1. Qual a diferença na relação de interfaces e classes abstratas com classes concretas e records?
+
+- [ ] Records podem implementar quantas interfaces quiser e 1 classe concreta por vez e classes só podem implementar interfaces  
+- [ ] Nenhuma das alternativas  
+- [ ] Somente records podem implementar interfaces e classes abstratas  
+- ✅ **Records só podem implementar interfaces, enquanto classes podem implementar 1 classe por vez e quantas interfaces quiser**  
+- [ ] Somente classes podem implementar interfaces e classes abstratas  
+
+---
+
+### 2. Qual a função da anotação `@FunctionalInterface`?
+
+- [ ] Marcar uma interface como interface funcional, ela é obrigatória para definir uma interface funcional  
+- [ ] Define que uma interface pode ser usada como lambda  
+- [ ] Marca um método que pode receber uma interface funcional como parâmetro  
+- ✅ **Marcar uma interface como interface funcional, porém não é requisito obrigatório para interface ser considerada funcional, porém irá gerar erros se colocada em uma interface que não atende os requisitos de uma**  
+- [ ] Nenhuma das alternativas  
+
+---
+
+### 3. Qual das características **não** são de uma interface?
+
+- [ ] Métodos concretos devem ser `default`  
+- [ ] Métodos não `default` devem ser abstratos  
+- [ ] Não pode definir construtores  
+- [ ] Podem ser implementadas por records  
+- ✅ **Nenhuma das alternativas**  
+
+---
+
+### 4. Qual a diferença de uma interface e uma interface funcional?
+
+- [ ] Ela deve ser instanciada como classe anônima  
+- [ ] Nenhuma das alternativas  
+- [ ] Ela deve ser marcada com a anotação `@FunctionalInterface`  
+- [ ] Para a interface ser considerada interface funcional ela deve ter somente um método `default`, porém pode ter quantos métodos que exigem implementação quiser  
+- ✅ **Para a interface ser considerada interface funcional ela deve ter somente um método que exige implementação, porém ela pode ter quantos métodos `default` quiser**  
+
+---
+
+## Exercicios
+
+1. - Escreva um código para enviar mensagens de marketing, para isso você deve ter a possibilidade de enviar a mesma mensagem para serviços diferentes, esses serviços devem ter um método para receber a mensagem como parâmetro, os serviços que devem estar disponíveis são:
+
+SMS;
+E-mail;
+Redes Sociais;
+WhatsApp;
+
+2. - Escreva um código que calcule o valor de tributos de produtos, os produtos disponíveis devem ser dos seguintes tipos: Alimentação, Saude e bem estar, Vestuário e Cultura. Todos os produtos devem ter um método para retornar o seu valor de imposto, de acordo com seu tipo:
+
+Alimentação 1%;
+Saude e bem estar 1.5%;
+Vestuário 2.5%;
+Cultura 4%.
+
+3. - Escreva um código onde seja possível calcular a área de uma figura geométrica, todas devem ter um método que retorne esse valor, as formas geométricas disponiveis devem ser as seguintes:
+
+Quadrado: possui o valor dos seus lados;
+Retângulo: possui os valores de base e altura;
+Circulor: possui o atributo raio.
