@@ -374,6 +374,8 @@ E-mail;
 Redes Sociais;
 WhatsApp;
 
+- [Resultado da ativiodade criada do zero](./Exercicios_interfaces/Mensageiro/)
+
 2. - Escreva um código que calcule o valor de tributos de produtos, os produtos disponíveis devem ser dos seguintes tipos: Alimentação, Saude e bem estar, Vestuário e Cultura. Todos os produtos devem ter um método para retornar o seu valor de imposto, de acordo com seu tipo:
 
 Alimentação 1%;
@@ -381,8 +383,55 @@ Saude e bem estar 1.5%;
 Vestuário 2.5%;
 Cultura 4%.
 
+- [Resultado da ativiodade criada do zero](./Exercicios_interfaces/Tributavel/)
+
 3. - Escreva um código onde seja possível calcular a área de uma figura geométrica, todas devem ter um método que retorne esse valor, as formas geométricas disponiveis devem ser as seguintes:
 
 Quadrado: possui o valor dos seus lados;
 Retângulo: possui os valores de base e altura;
 Circulor: possui o atributo raio.
+
+- [Resultado da ativiodade criada do zero](./Exercicios_interfaces/Geometria/)
+
+# Quiz de Interfaces
+
+
+### 1. Qual o modificador de acesso usado para restringir um método ou atributo a ser acessado apenas dentro da mesma classe?
+
+- [ ] protected  
+- [ ] final  
+- [ ] public  
+- ✅ **private**  
+- [ ] default  
+
+---
+
+### 2. Qual das opções abaixo não é uma palavra-chave (keyword) reservada em Java?
+
+- [ ] final  
+- [ ] class  
+- ✅ **implement**  
+- [ ] extends  
+- [ ] interface  
+
+---
+
+### 3. Qual palavra-chave em Java é usada para indicar que uma classe implementa uma interface?
+
+- ✅ **implements**  
+- [ ] extends  
+- [ ] interface  
+- [ ] abstract  
+- [ ] inherit  
+
+---
+
+### 4. Qual das opções é uma característica de uma interface funcional em Java?
+
+- [ ] Só pode ser usada com classes abstratas.  
+- [ ] Pode conter múltiplos métodos abstratos.  
+- [ ] Deve ser declarada como abstract.  
+- ✅ **É uma interface que contém exatamente um método abstrato.**  
+- [ ] Não pode conter métodos estáticos ou padrões.  
+
+---
