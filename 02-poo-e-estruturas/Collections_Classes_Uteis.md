@@ -1245,3 +1245,446 @@ List<? super Integer> listaSuperInteiros; // Aceita Integer ou supertipos
 
 ## Classe Date e Calendar
 
+---
+
+## 🕒 `java.util.Date`
+
+A classe `Date` representa **instantes no tempo**, com precisão de milissegundos. Apesar de ser amplamente usada, muitos métodos dela estão **obsoletos** e substituídos pela `Calendar` ou pela API nova (`java.time.*`).
+
+### 🧪 Exemplo de criação:
+
+```java
+import java.util.Date;
+
+Date agora = new Date();
+System.out.println(agora);
+````
+
+---
+
+### 📆 `setYear()` e o ajuste de 1900
+
+Quando usamos `setYear(int year)` ou `getYear()`, o valor retornado ou definido é **relativo a 1900**.
+
+```java
+Date data = new Date();
+data.setYear(123); // ano 2023 (123 + 1900)
+```
+
+> ⚠️ Esses métodos são **obsoletos** e devem ser evitados em novos projetos.
+
+---
+
+### ⌚ `SimpleDateFormat`
+
+Utilizada para formatar e **converter datas para texto** ou vice-versa.
+
+```java
+import java.text.SimpleDateFormat;
+
+Date agora = new Date();
+SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+System.out.println(formato.format(agora));
+```
+
+### ✅ Formatos comuns:
+
+| Letra | Significado       | Exemplo |
+| ----- | ----------------- | ------- |
+| dd    | Dia do mês        | 16      |
+| MM    | Mês (numérico)    | 07      |
+| yyyy  | Ano com 4 dígitos | 2025    |
+| HH    | Hora (24h)        | 18      |
+| hh    | Hora (12h)        | 06      |
+| mm    | Minutos           | 35      |
+| ss    | Segundos          | 12      |
+
+---
+
+### 📉 `before()` e `after()`
+
+Permite comparar datas:
+
+```java
+Date hoje = new Date();
+Date futuro = new Date(hoje.getTime() + 1000000);
+
+System.out.println(hoje.before(futuro)); // true
+System.out.println(futuro.after(hoje));  // true
+```
+
+---
+
+## 📆 `java.util.Calendar`
+
+A classe `Calendar` é uma alternativa mais completa à `Date`, permitindo manipular datas com mais controle.
+
+```java
+import java.util.Calendar;
+
+Calendar calendario = Calendar.getInstance();
+System.out.println(calendario.getTime());
+```
+
+---
+
+### 🧩 Métodos úteis do `Calendar`:
+
+```java
+int ano        = calendario.get(Calendar.YEAR);
+int mes        = calendario.get(Calendar.MONTH) + 1; // Janeiro é 0
+int dia        = calendario.get(Calendar.DAY_OF_MONTH);
+int diaAno     = calendario.get(Calendar.DAY_OF_YEAR);
+int diaSemana  = calendario.get(Calendar.DAY_OF_WEEK);
+```
+
+| Constante               | Significado                 |
+| ----------------------- | --------------------------- |
+| `Calendar.YEAR`         | Ano                         |
+| `Calendar.MONTH`        | Mês (0 = Janeiro)           |
+| `Calendar.DAY_OF_MONTH` | Dia do mês                  |
+| `Calendar.DAY_OF_YEAR`  | Dia do ano                  |
+| `Calendar.DAY_OF_WEEK`  | Dia da semana (1 = Domingo) |
+
+---
+
+### 🛠️ Modificando datas:
+
+```java
+calendario.set(Calendar.YEAR, 2025);
+calendario.set(Calendar.MONTH, Calendar.DECEMBER);
+calendario.set(Calendar.DAY_OF_MONTH, 25);
+```
+
+---
+
+### ⏱️ Adicionando/Subtraindo datas:
+
+```java
+calendario.add(Calendar.DAY_OF_MONTH, 7); // +7 dias
+calendario.add(Calendar.MONTH, -1);       // -1 mês
+```
+
+---
+
+## ✅ Dica
+
+Hoje em dia, a **melhor abordagem** para manipulação de datas é usar a **API `java.time`**, introduzida no Java 8 (`LocalDate`, `LocalDateTime`, `DateTimeFormatter`, etc).
+
+---
+
+
+## OffsetDateTime OffsetTime, LocalDate, LocalDateTime e LocalTime
+
+Claro! Aqui está o conteúdo sobre `OffsetDateTime`, `OffsetTime`, `LocalDate`, `LocalTime` e `LocalDateTime` em Java, formatado em Markdown (`.md`):
+
+---
+
+## Qustionário:
+
+### 1. Sobre a classe `Date` do Java, qual das afirmações abaixo é correta?
+
+* [ ] O método `toString` de `Date` retorna apenas a data sem o horário
+* [ ] A classe `Date` não permite manipulação de time zones
+* [ ] A classe `Date` é a API mais moderna do Java para manipulação de datas
+* [ ] O método `setYear` da classe `Date` define o ano diretamente, sem nenhum cálculo adicional
+* ✅ **A classe `Date` é depreciada, mas ainda pode ser utilizada para compatibilidade com bibliotecas mais antigas**
+
+---
+
+### 2. Sobre a classe `Calendar` introduzida no Java 7, qual das opções abaixo é verdadeira?
+
+* ✅ **O método `getInstance` de `Calendar` é utilizado para criar instâncias com a data atual**
+* [ ] A classe `Calendar` não possui compatibilidade com a classe `Date`
+* [ ] O método `get` do `Calendar` retorna sempre o mês em formato textual, como "January" ou "February"
+* [ ] O método `setTime` de `Calendar` aceita apenas strings formatadas
+* [ ] A classe `Calendar` não suporta manipulação de diferentes time zones
+
+---
+
+### 3. Sobre a manipulação de Datas utilizando `Date` e `Calendar`, qual das alternativas abaixo é verdadeira?
+
+* ✅ **O método `get` do `Calendar` retorna valores constantes, como o número do mês ou dia da semana, e algumas dessas constantes começam em 0, como o mês**
+* [ ] O método `after` da classe `Date` verifica se uma data vem antes de outra
+* [ ] A classe `Calendar` não permite adição ou subtração de anos diretamente
+* [ ] O método `equals` de `Date` compara apenas os anos, ignorando meses e dias
+* [ ] A classe `Calendar` é incompatível com APIs de formatação de datas, como `SimpleDateFormat`
+
+---
+
+
+### 4. Qual é a principal diferença entre a classe `Date` e `Calendar` no Java?
+
+* ✅ **A classe `Calendar` oferece mais flexibilidade, como acesso granular a componentes de data, enquanto `Date` é mais limitada**
+* [ ] A classe `Date` suporta manipulações avançadas de datas, como adição de anos, enquanto o `Calendar` não
+* [ ] `Calendar` é uma API mais antiga que foi substituída por `Date` devido à sua simplicidade
+* [ ] Ambas as classes têm funcionalidades idênticas, mas `Calendar` é mais performática
+* [ ] `Date` é baseada na nova API de datas introduzida no Java 8, enquanto `Calendar` não
+
+---
+
+
+# 🕒 API de Datas e Horas no Java (java.time)
+
+Desde o Java 8, a API de datas e horas foi reformulada para oferecer **mais precisão**, **imutabilidade** e **segurança em aplicações multithread**. Essa nova API está no pacote `java.time`.
+
+---
+
+## 📅 `LocalDate`
+
+Representa **apenas a data**, sem hora.
+
+```java
+LocalDate dataHoje = LocalDate.now();
+LocalDate nascimento = LocalDate.of(1990, 5, 20);
+```
+
+* Métodos úteis:
+
+  * `getDayOfMonth()`, `getMonth()`, `getYear()`
+  * `plusDays()`, `minusMonths()`, `isBefore()`, `isAfter()`
+
+---
+
+## 🕰️ `LocalTime`
+
+Representa **apenas o horário**, sem data.
+
+```java
+LocalTime agora = LocalTime.now();
+LocalTime horaEspecifica = LocalTime.of(14, 30);
+```
+
+* Métodos úteis:
+
+  * `getHour()`, `getMinute()`, `getSecond()`
+  * `plusHours()`, `minusMinutes()`
+
+---
+
+## 📆🕐 `LocalDateTime`
+
+Combina `LocalDate` e `LocalTime`.
+
+```java
+LocalDateTime momento = LocalDateTime.now();
+LocalDateTime futuro = momento.plusDays(2).plusHours(3);
+```
+
+* Métodos úteis:
+
+  * Combina todos os métodos de `LocalDate` e `LocalTime`
+  * Ideal para representar uma data e hora sem fuso horário
+
+---
+
+## 🌐 `OffsetTime`
+
+Representa um horário com **informação de fuso horário (offset)**.
+
+```java
+OffsetTime horarioComOffset = OffsetTime.now();
+System.out.println(horarioComOffset); // Ex: 14:30:00.123456789-03:00
+```
+
+* Pode ser útil para representar dados com timezone parcial (sem data).
+
+---
+
+## 🌍 `OffsetDateTime`
+
+Representa uma **data e hora com fuso horário (offset)**.
+
+```java
+OffsetDateTime agoraOffset = OffsetDateTime.now();
+```
+
+* Contém os componentes de `LocalDateTime` **+ Offset (UTC±X)**.
+* Muito usado para **APIs REST**, onde se precisa informar a data e o fuso.
+
+---
+
+## ✅ Comparação Resumida
+
+| Classe           | Data | Hora | Fuso (Offset) | Exemplo                   |
+| ---------------- | ---- | ---- | ------------- | ------------------------- |
+| `LocalDate`      | ✅    | ❌    | ❌             | 2025-07-16                |
+| `LocalTime`      | ❌    | ✅    | ❌             | 14:30                     |
+| `LocalDateTime`  | ✅    | ✅    | ❌             | 2025-07-16T14:30          |
+| `OffsetTime`     | ❌    | ✅    | ✅             | 14:30-03:00               |
+| `OffsetDateTime` | ✅    | ✅    | ✅             | 2025-07-16T14:30:00-03:00 |
+
+---
+
+## 🧪 Exemplo Prático
+
+```java
+public class DatasExemplo {
+    public static void main(String[] args) {
+        LocalDate data = LocalDate.of(2025, 7, 16);
+        LocalTime hora = LocalTime.of(14, 0);
+        LocalDateTime completo = LocalDateTime.of(data, hora);
+        OffsetDateTime comOffset = OffsetDateTime.now();
+
+        System.out.println("Data: " + data);
+        System.out.println("Hora: " + hora);
+        System.out.println("Data e Hora: " + completo);
+        System.out.println("Com Offset: " + comOffset);
+    }
+}
+```
+
+# 🧵 Threads e Concorrência no Java
+
+## 🚀 O que é uma Thread?
+
+Uma **thread** (linha de execução) representa uma unidade básica de execução dentro de um processo. Um processo pode conter **várias threads**, permitindo que partes do código sejam executadas em paralelo.
+
+### ➕ Benefícios do uso de threads:
+
+* Melhor aproveitamento de **processadores multicore**;
+* Execução de **tarefas simultâneas** (ex: leitura de arquivos enquanto o usuário interage com a interface);
+* Melhoria de performance em determinadas aplicações, como servidores web ou jogos.
+
+---
+
+## 🧠 Interface `Runnable`
+
+A forma mais comum e recomendada de criar uma thread em Java é **implementando a interface `Runnable`**.
+
+### 📌 Exemplo básico:
+
+```java
+public class MeuRunnable implements Runnable {
+    @Override
+    public void run() {
+        System.out.println("Executando na thread: " + Thread.currentThread().getName());
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Thread t1 = new Thread(new MeuRunnable());
+        t1.start(); // inicia a execução em paralelo
+    }
+}
+```
+
+> O método `run()` contém o que será executado na nova thread.
+> O método `start()` inicia a execução de forma **assíncrona**.
+
+---
+
+## 🛠️ Concorrência vs. Paralelismo
+
+* **Concorrência**: a execução de múltiplas tarefas *intercaladamente*. Pode ocorrer mesmo em um único núcleo.
+* **Paralelismo**: a execução de múltiplas tarefas *ao mesmo tempo*, em núcleos diferentes.
+
+### 🧵 Exemplo de concorrência:
+
+```java
+Thread t1 = new Thread(() -> {
+    System.out.println("Tarefa 1");
+});
+
+Thread t2 = new Thread(() -> {
+    System.out.println("Tarefa 2");
+});
+
+t1.start();
+t2.start();
+```
+
+> As threads serão executadas de forma concorrente e **não é garantida a ordem de execução**.
+
+---
+
+## 🔒 Controle de Acesso em Ambientes Multithread
+
+### ❗ Problemas:
+
+Quando duas ou mais threads tentam acessar ou modificar a **mesma variável ou recurso** ao mesmo tempo, pode ocorrer **condição de corrida (race condition)**.
+
+### 🔐 Solução: `synchronized`
+
+A palavra-chave `synchronized` evita que **duas threads acessem um bloco de código ao mesmo tempo**.
+
+```java
+public class Contador {
+    private int valor = 0;
+
+    public synchronized void incrementar() {
+        valor++;
+    }
+
+    public synchronized int getValor() {
+        return valor;
+    }
+}
+```
+
+> O uso de `synchronized` **garante exclusão mútua** e **protege a integridade dos dados**.
+
+---
+
+## 🧰 Alternativas e Recursos Adicionais
+
+* `ReentrantLock` (mais flexível que `synchronized`);
+* `ExecutorService` para gerenciar pools de threads;
+* Classes thread-safe em `java.util.concurrent`, como `ConcurrentHashMap`, `AtomicInteger`.
+
+---
+
+## ✅ Boas Práticas
+
+* Evite usar `Thread.sleep()` para controle de sincronização;
+* Evite usar muitos blocos `synchronized`, pode gerar **deadlocks**;
+* Prefira usar o pacote `java.util.concurrent` para abstrações de alto nível.
+
+---
+
+
+## Questionário sobre Thread
+
+---
+
+### 1. Em que situação a classe `AtomicInteger` é mais adequada do que o uso de um `int` comum?
+
+* [ ] Quando se quer evitar completamente o uso de threads
+* [ ] Quando se deseja melhorar o desempenho de cálculos matemáticos simples em um programa single-thread
+* ✅ **Quando operações atômicas são necessárias em um ambiente multi-thread para evitar problemas de concorrência**
+* [ ] Quando o valor precisa ser sincronizado manualmente usando blocos `synchronized`
+* [ ] Quando um número deve ser convertido automaticamente para uma string
+
+---
+
+### 2. Qual é o objetivo principal do uso do bloco `synchronized` no código Java?
+
+* ✅ **Evitar problemas de concorrência garantindo acesso exclusivo a um recurso compartilhado**
+* [ ] Substituir métodos atômicos como `AtomicInteger` para sincronização
+* [ ] Melhorar o desempenho do código em ambientes multi-thread
+* [ ] Permitir que múltiplas threads acessem simultaneamente uma variável compartilhada
+* [ ] Garantir que métodos sejam executados apenas em threads de prioridade alta
+
+---
+
+### 3. Qual é a principal diferença entre a classe `Thread` e a interface `Runnable` no Java?
+
+* [ ] A interface `Runnable` é depreciada no Java moderno
+* [ ] Ambas são usadas para manipular listas sincronizadas em ambientes multi-thread
+* ✅ **A interface `Runnable` é usada para criar tarefas, enquanto a classe `Thread` é usada para executar essas tarefas**
+* [ ] A classe `Thread` não pode ser usada diretamente para executar tarefas paralelas
+* [ ] A classe `Thread` permite sincronização automática, enquanto `Runnable` não oferece suporte a isso
+
+---
+
+### 4. Qual classe Java é recomendada para manipulação de strings em cenários multi-thread, garantindo segurança contra concorrência?
+
+* ✅ **StringBuffer**
+* [ ] StringBuilder
+* [ ] AtomicString
+* [ ] ConcurrentString
+* [ ] String
+
+---
