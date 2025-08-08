@@ -1688,3 +1688,127 @@ public class Contador {
 * [ ] String
 
 ---
+
+## Exercícios: 
+
+Exercício 1
+
+```java
+package ExerciciosCollections;
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        /*
+        Enuncaiado:
+        1- Escreva um código que crie uma calculadora para as operações de soma e subtração, o usuário deve informar
+        todos os números que serão usados na conta de uma só vez utilizando virgulas para separalos.
+         */
+        Scanner scanner = new Scanner(System.in);
+        int resultado = 0;
+
+        System.out.println("Digite a operação a ser executada");
+        String operacao = scanner.nextLine();
+
+        System.out.println("Digite todos os valores a serem somados, separando por virgulas");
+        String valores = scanner.nextLine();
+
+        String[] numeros = valores.split(",");
+
+        for (String numero : numeros) {
+            try {
+
+                if (operacao.equals("+")) {
+                    resultado += Integer.parseInt(numero);
+                } else if (operacao.equals("-")) {
+                    resultado -= Integer.parseInt(numero);
+                }
+            } catch (NumberFormatException e) {
+                // Trata o caso em que a string não é um número válido
+                System.out.println("Erro: A string '" + numero + "' não é um número válido.");
+            }
+        }
+
+        System.out.println("A operação utilizada é: " + operacao);
+        System.out.println("O resultado executado é: " + resultado);
+    }
+}
+
+```
+
+## Exercício 2
+
+```java
+package ExerciciosCollections;
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        /*
+        Enuncaiado:
+        2 - Escreva um código que receba entradas sem formatação e as retorne formatadas, os tipos de entradas que o
+        código deve retornar são as seguintes:
+
+        Telefone fixo (8 dígitos sem DDD xxxx-xxxx, 10 Dígitos com DDD (xx)xxxx-xxxx);
+        Celular (9 dígitos sem DDD xxxxx-xxxx, 11 dígitos (xx)xxxxx-xxxx);
+        O código deve ser capaz de detectar as seguintes situações:
+
+        Se receber somente números detectar se corresponde com algum dos formatos aceitos e retornar formatado;
+        Se receber uma entrada com quantidade de números diferentes dos padrões descritos acima, informar que não se
+        trata de um número válido;
+        Se receber um número formatado, retorna-lo do mesmo jeito e informar de qual tipo de dispositivo se trata;
+        Se receber com mascara incorreta, corrigir e retornar
+        Se receber qualquer entrada que tenha números e outros caracteres verificar se tem números para compor um dos
+        tipos aceitos e retornar do que se trata ou retornar que foi uma entrada inválida.
+         */
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Digite o número de telefone");
+        String operacao = scanner.nextLine();
+
+
+        System.out.println(FormatarTelefone.formatarTelefone(operacao));
+    }
+
+    public class FormatarTelefone {
+
+        public static String formatarTelefone(String telefone) {
+            // 1. Limpa a string, mantendo apenas os números
+            String somenteNumeros = telefone.replaceAll("[^0-9]", "");
+
+            int tamanho = somenteNumeros.length();
+
+            // 2. Verifica o tamanho e aplica a formatação
+            if (tamanho == 8) {
+                // Fixo sem DDD: xxxx-xxxx
+                return somenteNumeros.substring(0, 4) + "-" + somenteNumeros.substring(4, 8);
+            } else if (tamanho == 9) {
+                // Celular sem DDD: xxxxx-xxxx
+                return somenteNumeros.substring(0, 5) + "-" + somenteNumeros.substring(5, 9);
+            } else if (tamanho == 10) {
+                // Fixo com DDD: (xx)xxxx-xxxx
+                String ddd = somenteNumeros.substring(0, 2);
+                String primeiraParte = somenteNumeros.substring(2, 6);
+                String segundaParte = somenteNumeros.substring(6, 10);
+                return "(" + ddd + ")" + primeiraParte + "-" + segundaParte;
+            } else if (tamanho == 11) {
+                // Celular com DDD: (xx)xxxxx-xxxx
+                String ddd = somenteNumeros.substring(0, 2);
+                String primeiraParte = somenteNumeros.substring(2, 7);
+                String segundaParte = somenteNumeros.substring(7, 11);
+                return "(" + ddd + ")" + primeiraParte + "-" + segundaParte;
+            } else {
+                // Caso não se encaixe em nenhum formato
+                return "Número de telefone inválido";
+            }
+        }
+    }
+}
+
+
+```
